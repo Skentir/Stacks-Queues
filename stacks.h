@@ -9,7 +9,7 @@
 #define MAX 100
 
 
-typedef  struct stk {
+typedef  struct stak {
     int stack_size;
     int stack_data[MAX];
     int top1;
@@ -27,7 +27,7 @@ typedef  struct stk {
  * */
 Stack createStack(int size) {
     Stack stack;
-    if (size > 1) {
+    if (size >= 1) {
         stack.stack_size = size;
         stack.top1 = -1;
         stack.top2 = size;
@@ -128,9 +128,9 @@ void display1(Stack stk) {
     printf("\n");
 }
 
-void display2(Stack *stk) {
+void display2(Stack stk) {
     int i;
-    for (i=stk->top2; i < stk->stack_size; i++)
-        printf("%d @ idx %d\n", stk->stack_data[i], i);
+    for (i=stk.top2; i < stk.stack_size; i++)
+        printf("%d @ idx %d\n", stk.stack_data[i], i);
     printf("\n");
 }

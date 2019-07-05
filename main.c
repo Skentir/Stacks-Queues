@@ -2,41 +2,77 @@
 #include "stacks.h"
 #include "queues.h"
 
-int main() {
-    int stack_size;
+int main()
+{ /*
+#if 1
+    int s_size;
     printf("Creating two stacks . . .\n");
     printf("Please enter a size: ");
 
     do {
-        scanf("%d", &stack_size);
-    } while(stack_size < 2);
+        scanf("%d", &s_size);
+    } while(s_size < 2);
 
-    Stack stk = create(stack_size);
-    printf("Stacks created!\n");
+
+    Stack stk = createStack(s_size);
+    printf("Stacks created!\n\n");
     push1(1, &stk);
-  //  push2(2, &stk);
-  //  printf("After push %d",);
-    push1(3, &stk);
- //   push2(4, &stk);
-    printf("Pushed\n");
-    push1(4, &stk);
- //   push2(5, &stk);
+    push1(2, &stk);
+//	push2(&stk, 5);
+//	push2(&stk, 6);
+//	push2(&stk, 7);
 
-    // Problem here!!
+    push1(8, &stk);
+
+    printf("\nStack 1:");
     display1(stk);
-    display2(&stk);
+    printf("\nStack 2:");
+    display2(stk);
 
- //   pop1(&stk);
-  //  pop2(&stk);
+    // if you wanna both ss to be empty pop everything
+    //  printf("\n%d", pop1(&stk));
+    //printf("\n%d", pop1(&stk));
+//    printf("\n%d", pop2(&stk));
+//    printf("\n%d", pop2(&stk));
 
-    display1(stk);
-    display2(&stk);
 
-    int s1_empty = isEmpty1(&stk);
-    int s1_full = isFull1(&stk);
+    int s1_empty = isEmpty1(stk);
+    int s1_full = isFull1(stk);
 
-    int s2_empty = isEmpty2(&stk);
-    int s2_full = isFull2(&stk);
-    printf("Stack1: %d , %d\nStack2: %d , %d\n", s1_empty,s1_full,s2_empty, s1_full);
+    int s2_empty = isEmpty2(stk);
+    int s2_full = isFull2(stk);
+    printf("\nStack 1: %d , %d", s1_empty,s1_full);
+    printf("\nStack 2: %d , %d\n", s2_empty, s2_full);
+
+#endif
+
+#if 0 */
+    int q_size;
+    printf("Creating queue . . .\n");
+    printf("Please enter a size: ");
+
+	do {
+    	scanf("%d", &q_size);
+   } while(q_size < 2);
+
+
+    Queue que = createQueue(q_size);
+    printf("Queue created!\n\n");
+    enqueue(1, &que);
+		display1(que.queue);
+	enqueue(2,&que);
+	enqueue(3, &que);
+		display1(que.queue);
+	int num = dequeue(&que);
+		display2(que.queue);
+
+
+	int q_isFull = isFull(que);
+	int q_isEmpty = isEmpty(que);
+//	int front = front(que); FIX!!
+	printf("\n\n Empty: %d, Full: %d, dequeue num = %d\n", q_isEmpty, q_isFull, num);
+//#endif
+
+
     return 0;
 }
