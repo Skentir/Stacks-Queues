@@ -44,7 +44,6 @@ int isFull1(Stack stack) {
 }
 
 int isFull2(Stack stack) {
-    printf("%d , %d\n", stack.top2-1, stack.top1);
     if (stack.top2-1 == stack.top1 || stack.top2 == 0)
         return 1;
     else
