@@ -1,11 +1,7 @@
 //
-// Created by Kirsten S. on 2019-07-04.
+// Created by Kirsten S. and Leanne L. on 2019-07-04.
 //
 #include <stdio.h>
-#ifndef STACKS_STACKS_N_QUEUES_H
-#define STACKS_STACKS_N_QUEUES_H
-
-#endif //STACKS_STACKS_N_QUEUES_H
 #define MAX 100
 
 
