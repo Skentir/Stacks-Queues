@@ -1,88 +1,80 @@
-//
-// Created by Kirsten S. and Leanne L. on 2019-07-04.
-//
+#include <stdlib.h>
 #include <stdio.h>
 
-typedef struct que {
-    Stack queue;
-    int queue_size;
-} Queue;
+typedef struct que { ;
+    int size;
+    int front;
+    int rear;
+    int itemCount;
+    int *intArray;
+}Queue;
 
-/* Queue Operations
- * enqueue() - removes an element from the queue and returns it
- * dequeue() - adds an element on top of the queue
- * front() - checks the oldest element of the queue
- * isEmpty() - checks if stack is empty
- * isFull() - checks if stack is full
- * */
-Queue createQueue(int size) {
-    Queue Q; Stack stack;
+Queue createQ(int size)
+{
+    Queue q;
     if (size >= 2) {
-        Q.queue_size = size;
-        stack = createStack(size * 2);
-        Q.queue = stack;
+        q.intArray = (int*)malloc(size * sizeof(int));
+        q.size = size;
+        q.front = 0;
+        q.rear = -1;
+        q.itemCount = 0;
+
     } else
-        printf("Size is too small for a queue!\n");
-    return Q;
+        printf("Size too small!\n");
+    return q;
+}
+int peek(Queue Q) {
+    return Q.intArray[Q.front];
 }
 
-void enqueue(int data, Queue *Q) {
-    int i;
-    /* If contents of stack 1 are moved to stack 2  because of dequeue*/
-    if (!(isEmpty2(Q->queue)) && Q->queue.top1 + 1 != Q->queue_size) {
-        for (i = Q->queue.top2; i < Q->queue.stack_size ; i++)
-            push1(pop2(&Q->queue), &Q->queue);
-        push1(data, &Q->queue);
-    } /* If stack 1 is not yet full, then add it */
-    else if (!(isFull1(Q->queue)) && Q->queue.top1 + 1 != Q->queue_size)
-    {
-        push1(data, &Q->queue);
-    } else
-        printf("Queue is full\n");
-}
-int dequeue(Queue *Q) {
-    int i;
-    /* If dequeue is repeatedly called */
-    if (!(isEmpty2(Q->queue)))
-    {
-        return pop2(&Q->queue);
-    } else {
-        /* If stack 1 is not empty, push all of it to stack 2 and pop the last elemennt */
-        if (!(isEmpty1(Q->queue)))
-        {
-            for (i = Q->queue.top1; i >= 0; i--)
-                push2(pop1(&Q->queue), &Q->queue);
-            return pop2(&Q->queue);
-        } else
-            return -1;
-    }
+int size(Queue Q) {
+    return Q.itemCount;
 }
 
-int front(Queue Q) { // FIX!!
-    int i;
-    /* If dequeue is repeatedly called */
-    if (!(isEmpty2(Q.queue))) {
-        return top2(Q.queue);
-    } else {
-        /* If stack 1 is not empty, push all of it to stack 2 and pop the last elemennt */
-        if (!(isEmpty1(Q.queue))) {
-            for (i = Q.queue.top1; i >= 0; i--)
-                push2(pop1(&Q.queue), &Q.queue);
-            return top2(Q.queue);
-        } else
-            return -1;
-    }
+int isEmptyQ(Queue Q) {
+    return !size(Q);
 }
 
-int isFull(Queue Q) {
-    if (isFull1(Q.queue))
+int front(Queue Q) {
+    if (isEmptyQ(Q))
         return 1;
-    else return 0;
+    else
+        return Q.intArray[Q.front];
 }
 
-int isEmpty(Queue Q) {
-    if (isEmpty1(Q.queue))
+int isFullQ(Queue Q) {
+    if (Q.itemCount == Q.size)
         return 1;
     else
         return 0;
 }
+
+void enqueue(int data, Queue *Q) {
+
+    if(!isFullQ(*Q)) {
+        Q->rear = (Q->rear + 1) % Q->size;
+        Q->intArray[Q->rear] = data;
+   //     printf("enqueue %d at idx %d\n", data, Q->rear);
+        Q->itemCount++;
+    } else
+        printf("Stack Overflow!\n");
+}
+
+int dequeue(Queue *Q) {
+    int x = -1;
+    if (!isEmptyQ(*Q)) {
+        x = Q->intArray[Q->front];
+        Q->front = (Q->front+1)% Q->size;
+   //     printf("dequeue %d at idx %d\n", Q->intArray[Q->front], Q->front);
+        Q->itemCount--;
+        return  x;
+    } else
+        printf("Stack underflow!\n");
+    return x;
+}
+/*
+void displayQ(Queue Q) {
+    int;
+
+} */
+
